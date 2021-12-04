@@ -9,7 +9,9 @@ def window(seq, n=2):
     
     for elem in it:
         res = res[1:] + (elem,)
-        yield result
+        yield res
 
 
-data = [int(i) for i in open("input.txt").readlines()]
+data = (int(i) for i in open("input.txt").readlines())
+increases = sum(sum(cur) < sum(nxt) for cur, nxt in window(window(data, 3)))
+print(increases)
