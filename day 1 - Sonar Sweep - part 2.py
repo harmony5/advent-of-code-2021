@@ -1,19 +1,13 @@
-from itertools import islice
+from itertools import islice, starmap, tee
+from operator import lt
 
+# solution inspired by https://mathspp.com/blog/advent-of-code-sonar-sweep-analysis
 
-def window(seq, n=2):
-    # taken from https://stackoverflow.com/a/6822773 and https://docs.python.org/release/2.3.5/lib/itertools-example.html
-    it = iter(seq)
-    res = tuple(islice(it, n))
+with open("input.txt") as f:
+    data = (line for line in f)
 
-    if len(res) == n:
-        yield res
+curs, nexts = tee(data)
+nexts = islice(nexts, 3, None)
+increases = sum(starmap(lt, zip(curs, nexts)))
 
-    for elem in it:
-        res = res[1:] + (elem,)
-        yield res
-
-
-data = (int(i) for i in open("input.txt").readlines())
-increases = sum(sum(cur) < sum(nxt) for cur, nxt in window(window(data, 3)))
 print(increases)
