@@ -1,5 +1,7 @@
 from functools import reduce
-data = open("input.txt").readlines()
+
+with open("input.txt") as f:
+    data = f.readlines()
 
 # transpose
 data = [*zip(*data)]

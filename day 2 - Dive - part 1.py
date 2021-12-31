@@ -1,6 +1,8 @@
 from collections import defaultdict
 
-data = open("input.txt").readlines()
+with open("input.txt") as f:
+    data = f.readlines()
+
 commands = defaultdict(int)
 
 for line in data:

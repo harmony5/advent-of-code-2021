@@ -25,7 +25,8 @@ def sum_board(board):
     return sum(int(n) for n in chain.from_iterable(board) if n is not None)
 
 def solve():
-    data = open("input.txt").read()
+    with open("input.txt") as f:
+        data = f.read()
     draws, boards = prepare(data)
     
     for i, draw in enumerate(draws):

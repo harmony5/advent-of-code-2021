@@ -1,4 +1,5 @@
-data = open("input.txt").readlines()
+with open("input.txt") as f:
+    data = f.readlines()
 
 def solve(rows, f, col_idx=0):
     if len(rows) == 1:
