@@ -1,4 +1,9 @@
-def minmax(seq, key=lambda x: x):
+from typing import Any, Callable, Iterable, TypeVar
+
+T = TypeVar("T")
+
+
+def minmax(seq: Iterable[T], key: Callable[[T], Any] = lambda x: x):
     min_el = max_el = None
     for el in set(seq):
         if min_el is None or key(el) < key(min_el):
@@ -9,7 +14,9 @@ def minmax(seq, key=lambda x: x):
     return min_el, max_el
 
 
-def reduce_rating(ratings, col_index, bit, use_most_common):
+def reduce_rating(
+    ratings: Iterable[str], col_index: int, bit: int | str, use_most_common: bool
+) -> Iterable[str]:
     current_col = [row[col_index] for row in ratings]
     least_common, most_common = minmax(current_col, key=current_col.count)
 
